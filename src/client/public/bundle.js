@@ -25437,13 +25437,9 @@
 	
 	var _GameActions = __webpack_require__(/*! ./GameActions */ 231);
 	
-	var GameActions = _interopRequireWildcard(_GameActions);
-	
 	var _Game = __webpack_require__(/*! ./Game */ 236);
 	
 	var _Game2 = _interopRequireDefault(_Game);
-	
-	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -25456,14 +25452,14 @@
 	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 	  return {
 	    handleStart: function handleStart() {
-	      dispatch(GameActions.START_GAME);
+	      dispatch((0, _GameActions.startGame)());
 	    }
 	  };
 	};
 	
-	var GameDisplay = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_Game2.default);
+	var GameContainer = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_Game2.default);
 	
-	exports.default = GameDisplay;
+	exports.default = GameContainer;
 
 /***/ },
 /* 231 */
@@ -25485,6 +25481,7 @@
 	var UPDATE_SCORE = exports.UPDATE_SCORE = 'UPDATE_SCORE';
 	var START_GAME = exports.START_GAME = 'START_GAME';
 	
+	// TODO 'Actions must be plain objects' - resolve error
 	var startGame = exports.startGame = function startGame() {
 	    return {
 	        type: START_GAME

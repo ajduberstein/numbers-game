@@ -2,7 +2,6 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { startGame, updateScore, nextTask } from './GameActions';
 import Game from './Game';
-import * as GameActions from './GameActions';
 
 
 const mapStateToProps = (state) => {
@@ -14,14 +13,14 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     handleStart: () => {
-      dispatch(GameActions.START_GAME)
+      dispatch(startGame())
     }
   }
 };
 
-const GameDisplay = connect(
+const GameContainer = connect(
   mapStateToProps,
   mapDispatchToProps
 )(Game);
 
-export default GameDisplay
+export default GameContainer;

@@ -5,6 +5,7 @@ export const UPDATE_SCORE = 'UPDATE_SCORE';
 export const START_GAME  = 'START_GAME';
 
 
+// TODO 'Actions must be plain objects' - resolve error
 export const startGame = () => {
     return {
         type: START_GAME
@@ -20,7 +21,7 @@ export const updateScore = (input, currentValues) => {
             gotTaskRight: distance === 0
         }
     };
-}
+};
 
 export const nextTask = () => {
     let taskList = makeRandomArray(10, 10);

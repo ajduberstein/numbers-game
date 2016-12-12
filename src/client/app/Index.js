@@ -1,14 +1,18 @@
 import React from 'react'
 import { render } from 'react-dom'
 import { Provider } from 'react-redux'
-import {createStore, combineReducers} from 'redux';
+import { applyMiddleware, combineReducers, createStore } from 'redux';
+import createLogger from 'redux-logger';
 
 import App from './App'
 import gameReducer from './GameReducers';
 
-const rootReducer = combineReducers({
-     gameReducer
-});
+const logger = createLogger();
+
+const rootReducer = combineReducers(
+    {gameReducer},
+    applyMiddleware(logger)
+);
 
 const store = createStore(rootReducer);
 

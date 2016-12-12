@@ -1,11 +1,14 @@
 import React from 'react';
 import {render} from 'react-dom';
 import {Container, Grid, Button, Header} from 'semantic-ui-react'
+import { bindActionCreators } from 'redux'
+import { dispatch, connect } from 'react-redux'
+
 
 export default class Game extends React.Component {
     render () {
         let button;
-        if (!this.props.hasBegun) button = <Button size='massive' onPress={this.props.handleStart}>Begin</Button>;
+        if (!this.props.hasBegun) button = <Button size='massive' onClick={this.props.handleStart}>Begin</Button>;
         return (<Container>
            <Grid centered padded columns={1}>
             <Grid.Column>
@@ -19,3 +22,4 @@ export default class Game extends React.Component {
         </Container>);
     }
 }
+

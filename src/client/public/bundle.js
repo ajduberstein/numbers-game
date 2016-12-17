@@ -59,9 +59,7 @@
 	
 	var _redux = __webpack_require__(/*! redux */ 190);
 	
-	var _reduxLogger = __webpack_require__(/*! redux-logger */ 223);
-	
-	var _reduxLogger2 = _interopRequireDefault(_reduxLogger);
+	var _LogUtils = __webpack_require__(/*! ./LogUtils */ 771);
 	
 	var _App = __webpack_require__(/*! ./App */ 229);
 	
@@ -73,11 +71,10 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var logger = (0, _reduxLogger2.default)();
+	// In theory, combineReducers goes here
+	var rootReducer = _GameReducers2.default;
 	
-	var rootReducer = (0, _redux.combineReducers)({ gameReducer: _GameReducers2.default }, (0, _redux.applyMiddleware)(logger));
-	
-	var store = (0, _redux.createStore)(rootReducer);
+	var store = (0, _redux.createStore)(rootReducer, (0, _redux.applyMiddleware)(_LogUtils.logger));
 	
 	(0, _reactDom.render)(_react2.default.createElement(
 	  _reactRedux.Provider,
@@ -25500,7 +25497,7 @@
 	};
 	
 	var nextTask = exports.nextTask = function nextTask() {
-	    var taskList = (0, _GameUtils.makeRandomArray)(10, 10);
+	    var taskList = (0, _GameUtils.makeRandomArray)({ length: 10, greatestInteger: 10 });
 	    return {
 	        type: NEXT_TASK,
 	        payload: {
@@ -25532,9 +25529,9 @@
 	
 	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 	
-	function makeRandomArray(length, max) {
-	    return [].concat(_toConsumableArray(new Array(length))).map(function (_, i) {
-	        return Math.round(Math.random() * max);
+	function makeRandomArray(args) {
+	    return [].concat(_toConsumableArray(new Array(args.arrayLength))).map(function (_, i) {
+	        return Math.round(Math.random() * args.greatestInteger);
 	    });
 	}
 	
@@ -61581,8 +61578,6 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.GameState = undefined;
-	exports.default = gameReducer;
 	
 	var _GameActions = __webpack_require__(/*! ./GameActions */ 231);
 	
@@ -61592,14 +61587,14 @@
 	
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 	
-	var GameState = exports.GameState = new _immutable.Record({
+	var GameState = new _immutable.Record({
 	  currentTask: null,
-	  active: false,
+	  hasBegun: false,
 	  tasksCorrect: 0,
 	  totalTasks: 0
 	});
 	
-	function gameReducer() {
+	var gameReducer = function gameReducer() {
 	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : new GameState();
 	  var _ref = arguments[1];
 	  var payload = _ref.payload,
@@ -61607,7 +61602,7 @@
 	
 	  switch (type) {
 	    case gameActions.START_GAME:
-	      return state.set('active', true);
+	      return state.merge({ hasBegun: true });
 	
 	    case gameActions.UPDATE_SCORE:
 	      return state.merge({
@@ -61616,12 +61611,14 @@
 	      });
 	
 	    case gameActions.NEXT_TASK:
-	      return state.set('currentTask', payload.nextTask);
+	      return state.merge({ currentTask: payload.nextTask });
 	
 	    default:
 	      return state;
 	  }
-	}
+	};
+	
+	exports.default = gameReducer;
 
 /***/ },
 /* 770 */
@@ -66609,6 +66606,37 @@
 	  return Immutable;
 	
 	}));
+
+/***/ },
+/* 771 */
+/*!************************************!*\
+  !*** ./src/client/app/LogUtils.js ***!
+  \************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.logger = undefined;
+	
+	var _reduxLogger = __webpack_require__(/*! redux-logger */ 223);
+	
+	var _reduxLogger2 = _interopRequireDefault(_reduxLogger);
+	
+	var _immutable = __webpack_require__(/*! immutable */ 770);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	// LogUtils.js
+	var stateTransformer = function stateTransformer(state) {
+	  if (_immutable.Iterable.isIterable(state)) return state.toJS();else return state;
+	};
+	
+	var logger = exports.logger = (0, _reduxLogger2.default)({
+	  stateTransformer: stateTransformer
+	});
 
 /***/ }
 /******/ ]);

@@ -2,19 +2,18 @@ import React from 'react'
 import { render } from 'react-dom'
 import { Provider } from 'react-redux'
 import { applyMiddleware, combineReducers, createStore } from 'redux';
-import createLogger from 'redux-logger';
+import { logger } from './LogUtils';
 
 import App from './App'
 import gameReducer from './GameReducers';
 
-const logger = createLogger();
+// In theory, combineReducers goes here
+const rootReducer = gameReducer;
 
-const rootReducer = combineReducers(
-    {gameReducer},
+const store = createStore(
+    rootReducer,
     applyMiddleware(logger)
 );
-
-const store = createStore(rootReducer);
 
 render(
   <Provider store={store}>

@@ -6,7 +6,7 @@ import {Grid, Header, Container} from 'semantic-ui-react'
 
 export default class App extends React.Component {
     render () {
-        return(
+        return (
             <div>
                 <GameContainer />
             </div>

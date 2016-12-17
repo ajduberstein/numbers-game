@@ -1,17 +1,17 @@
 import * as gameActions from './GameActions';
 import { Record  } from 'immutable';
 
-export const GameState = new Record({
+const GameState = new Record({
   currentTask: null,
-  active: false,
+  hasBegun: false,
   tasksCorrect: 0,
   totalTasks: 0
 });
 
-export default function gameReducer(state = new GameState(), {payload, type}) {
+const gameReducer = (state = new GameState(), {payload, type}) => {
   switch (type) {
     case gameActions.START_GAME:
-      return state.set('active', true);
+      return state.merge({hasBegun: true});
 
     case gameActions.UPDATE_SCORE:
         return state.merge({
@@ -20,9 +20,11 @@ export default function gameReducer(state = new GameState(), {payload, type}) {
         });
 
     case gameActions.NEXT_TASK:
-      return state.set('currentTask', payload.nextTask);
+      return state.merge({currentTask: payload.nextTask});
 
     default:
       return state;
   }
 }
+
+export default gameReducer;

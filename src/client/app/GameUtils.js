@@ -1,7 +1,9 @@
 import levenshtein from 'fast-levenshtein';
 
-export function makeRandomArray(length, max){
-    return [...new Array(length)].map((_, i) => Math.round(Math.random() * max));
+export function makeRandomArray(args){
+    return [...new Array(args.arrayLength)].map(
+        (_, i) => Math.round(Math.random() * args.greatestInteger)
+    );
 }
 
 export function getListLevenshtein(v1, v2) {

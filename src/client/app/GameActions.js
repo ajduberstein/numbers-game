@@ -5,7 +5,6 @@ export const UPDATE_SCORE = 'UPDATE_SCORE';
 export const START_GAME  = 'START_GAME';
 
 
-// TODO 'Actions must be plain objects' - resolve error
 export const startGame = () => {
     return {
         type: START_GAME

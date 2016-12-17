@@ -25451,6 +25451,7 @@
 	
 	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 	  return {
+	    // TODO verify state change
 	    handleStart: function handleStart() {
 	      dispatch((0, _GameActions.startGame)());
 	    }
@@ -25481,7 +25482,6 @@
 	var UPDATE_SCORE = exports.UPDATE_SCORE = 'UPDATE_SCORE';
 	var START_GAME = exports.START_GAME = 'START_GAME';
 	
-	// TODO 'Actions must be plain objects' - resolve error
 	var startGame = exports.startGame = function startGame() {
 	    return {
 	        type: START_GAME

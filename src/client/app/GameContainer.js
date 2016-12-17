@@ -12,6 +12,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    // TODO verify state change
     handleStart: () => {
       dispatch(startGame())
     }

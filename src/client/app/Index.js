@@ -5,7 +5,7 @@ import { applyMiddleware, combineReducers, createStore } from 'redux';
 import { logger } from './LogUtils';
 
 import App from './App'
-import gameReducer from './GameReducers';
+import gameReducer from './Game/GameReducers';
 
 // In theory, combineReducers goes here
 const rootReducer = gameReducer;

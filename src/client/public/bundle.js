@@ -65,7 +65,7 @@
 	
 	var _App2 = _interopRequireDefault(_App);
 	
-	var _GameReducers = __webpack_require__(/*! ./GameReducers */ 769);
+	var _GameReducers = __webpack_require__(/*! ./Game/GameReducers */ 776);
 	
 	var _GameReducers2 = _interopRequireDefault(_GameReducers);
 	
@@ -25374,7 +25374,7 @@
 	
 	var _reactDom = __webpack_require__(/*! react-dom */ 32);
 	
-	var _GameContainer = __webpack_require__(/*! ./GameContainer */ 230);
+	var _GameContainer = __webpack_require__(/*! ./Game/GameContainer */ 772);
 	
 	var _GameContainer2 = _interopRequireDefault(_GameContainer);
 	
@@ -25414,134 +25414,9 @@
 	exports.default = App;
 
 /***/ },
-/* 230 */
-/*!*****************************************!*\
-  !*** ./src/client/app/GameContainer.js ***!
-  \*****************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _react = __webpack_require__(/*! react */ 1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _reactRedux = __webpack_require__(/*! react-redux */ 183);
-	
-	var _GameActions = __webpack_require__(/*! ./GameActions */ 231);
-	
-	var _Game = __webpack_require__(/*! ./Game */ 236);
-	
-	var _Game2 = _interopRequireDefault(_Game);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var mapStateToProps = function mapStateToProps(state) {
-	  return {
-	    hasBegun: state.hasBegun
-	  };
-	};
-	
-	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-	  return {
-	    // TODO verify state change
-	    handleStart: function handleStart() {
-	      dispatch((0, _GameActions.startGame)());
-	    }
-	  };
-	};
-	
-	var GameContainer = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_Game2.default);
-	
-	exports.default = GameContainer;
-
-/***/ },
-/* 231 */
-/*!***************************************!*\
-  !*** ./src/client/app/GameActions.js ***!
-  \***************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	exports.nextTask = exports.updateScore = exports.startGame = exports.START_GAME = exports.UPDATE_SCORE = exports.NEXT_TASK = undefined;
-	
-	var _GameUtils = __webpack_require__(/*! ./GameUtils */ 232);
-	
-	var NEXT_TASK = exports.NEXT_TASK = 'NEXT_TASK';
-	var UPDATE_SCORE = exports.UPDATE_SCORE = 'UPDATE_SCORE';
-	var START_GAME = exports.START_GAME = 'START_GAME';
-	
-	var startGame = exports.startGame = function startGame() {
-	    return {
-	        type: START_GAME
-	    };
-	};
-	
-	var updateScore = exports.updateScore = function updateScore(input, currentValues) {
-	    var numCorrect = 0;
-	
-	    return {
-	        type: UPDATE_SCORE,
-	        payload: {
-	            gotTaskRight: distance === 0
-	        }
-	    };
-	};
-	
-	var nextTask = exports.nextTask = function nextTask() {
-	    var taskList = (0, _GameUtils.makeRandomArray)({ length: 10, greatestInteger: 10 });
-	    return {
-	        type: NEXT_TASK,
-	        payload: {
-	            taskList: taskList
-	        }
-	    };
-	};
-
-/***/ },
-/* 232 */
-/*!*************************************!*\
-  !*** ./src/client/app/GameUtils.js ***!
-  \*************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	exports.makeRandomArray = makeRandomArray;
-	exports.getListLevenshtein = getListLevenshtein;
-	
-	var _fastLevenshtein = __webpack_require__(/*! fast-levenshtein */ 233);
-	
-	var _fastLevenshtein2 = _interopRequireDefault(_fastLevenshtein);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-	
-	function makeRandomArray(args) {
-	    return [].concat(_toConsumableArray(new Array(args.arrayLength))).map(function (_, i) {
-	        return Math.round(Math.random() * args.greatestInteger);
-	    });
-	}
-	
-	function getListLevenshtein(v1, v2) {
-	    var vals = [v1.toString(), v2.toString()];
-	    var distance = _fastLevenshtein2.default.get(vals[0], vals[1]);
-	    return distance;
-	}
-
-/***/ },
+/* 230 */,
+/* 231 */,
+/* 232 */,
 /* 233 */
 /*!*******************************************!*\
   !*** ./~/fast-levenshtein/levenshtein.js ***!
@@ -25675,94 +25550,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, {}))
 
 /***/ },
-/* 236 */
-/*!********************************!*\
-  !*** ./src/client/app/Game.js ***!
-  \********************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _react = __webpack_require__(/*! react */ 1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _reactDom = __webpack_require__(/*! react-dom */ 32);
-	
-	var _semanticUiReact = __webpack_require__(/*! semantic-ui-react */ 237);
-	
-	var _redux = __webpack_require__(/*! redux */ 190);
-	
-	var _reactRedux = __webpack_require__(/*! react-redux */ 183);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var Game = function (_React$Component) {
-	    _inherits(Game, _React$Component);
-	
-	    function Game() {
-	        _classCallCheck(this, Game);
-	
-	        return _possibleConstructorReturn(this, (Game.__proto__ || Object.getPrototypeOf(Game)).apply(this, arguments));
-	    }
-	
-	    _createClass(Game, [{
-	        key: 'render',
-	        value: function render() {
-	            var button = void 0;
-	            if (!this.props.hasBegun) button = _react2.default.createElement(
-	                _semanticUiReact.Button,
-	                { size: 'massive', onClick: this.props.handleStart },
-	                'Begin'
-	            );
-	            return _react2.default.createElement(
-	                _semanticUiReact.Container,
-	                null,
-	                _react2.default.createElement(
-	                    _semanticUiReact.Grid,
-	                    { centered: true, padded: true, columns: 1 },
-	                    _react2.default.createElement(
-	                        _semanticUiReact.Grid.Column,
-	                        null,
-	                        _react2.default.createElement(
-	                            _semanticUiReact.Container,
-	                            { text: true },
-	                            _react2.default.createElement(
-	                                _semanticUiReact.Header,
-	                                { as: 'h1' },
-	                                'Mandarin Numbers'
-	                            ),
-	                            _react2.default.createElement(
-	                                'p',
-	                                null,
-	                                ' We\'ll read off a series of random numbers. Input the numbers you hear back.'
-	                            ),
-	                            button
-	                        )
-	                    )
-	                )
-	            );
-	        }
-	    }]);
-	
-	    return Game;
-	}(_react2.default.Component);
-	
-	exports.default = Game;
-
-/***/ },
+/* 236 */,
 /* 237 */
 /*!****************************************************!*\
   !*** ./~/semantic-ui-react/dist/commonjs/index.js ***!
@@ -61567,60 +61355,7 @@
 	exports.default = StatisticValue;
 
 /***/ },
-/* 769 */
-/*!****************************************!*\
-  !*** ./src/client/app/GameReducers.js ***!
-  \****************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _GameActions = __webpack_require__(/*! ./GameActions */ 231);
-	
-	var gameActions = _interopRequireWildcard(_GameActions);
-	
-	var _immutable = __webpack_require__(/*! immutable */ 770);
-	
-	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-	
-	var GameState = new _immutable.Record({
-	  currentTask: null,
-	  hasBegun: false,
-	  tasksCorrect: 0,
-	  totalTasks: 0
-	});
-	
-	var gameReducer = function gameReducer() {
-	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : new GameState();
-	  var _ref = arguments[1];
-	  var payload = _ref.payload,
-	      type = _ref.type;
-	
-	  switch (type) {
-	    case gameActions.START_GAME:
-	      return state.merge({ hasBegun: true });
-	
-	    case gameActions.UPDATE_SCORE:
-	      return state.merge({
-	        tasksCorrect: state.tasksCorrect + payload.gotTaskRight,
-	        totalTasks: state.totalTasks++
-	      });
-	
-	    case gameActions.NEXT_TASK:
-	      return state.merge({ currentTask: payload.nextTask });
-	
-	    default:
-	      return state;
-	  }
-	};
-	
-	exports.default = gameReducer;
-
-/***/ },
+/* 769 */,
 /* 770 */
 /*!***************************************!*\
   !*** ./~/immutable/dist/immutable.js ***!
@@ -66637,6 +66372,276 @@
 	var logger = exports.logger = (0, _reduxLogger2.default)({
 	  stateTransformer: stateTransformer
 	});
+
+/***/ },
+/* 772 */
+/*!**********************************************!*\
+  !*** ./src/client/app/Game/GameContainer.js ***!
+  \**********************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactRedux = __webpack_require__(/*! react-redux */ 183);
+	
+	var _GameActions = __webpack_require__(/*! ./GameActions */ 773);
+	
+	var _Game = __webpack_require__(/*! ./Game */ 775);
+	
+	var _Game2 = _interopRequireDefault(_Game);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var mapStateToProps = function mapStateToProps(state) {
+	  return {
+	    hasBegun: state.hasBegun
+	  };
+	};
+	
+	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+	  return {
+	    // TODO verify state change
+	    handleStart: function handleStart() {
+	      dispatch((0, _GameActions.startGame)());
+	    }
+	  };
+	};
+	
+	var GameContainer = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_Game2.default);
+	
+	exports.default = GameContainer;
+
+/***/ },
+/* 773 */
+/*!********************************************!*\
+  !*** ./src/client/app/Game/GameActions.js ***!
+  \********************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.nextTask = exports.updateScore = exports.startGame = exports.START_GAME = exports.UPDATE_SCORE = exports.NEXT_TASK = undefined;
+	
+	var _GameUtils = __webpack_require__(/*! ./GameUtils */ 774);
+	
+	var NEXT_TASK = exports.NEXT_TASK = 'NEXT_TASK';
+	var UPDATE_SCORE = exports.UPDATE_SCORE = 'UPDATE_SCORE';
+	var START_GAME = exports.START_GAME = 'START_GAME';
+	
+	var startGame = exports.startGame = function startGame() {
+	    return {
+	        type: START_GAME
+	    };
+	};
+	
+	var updateScore = exports.updateScore = function updateScore(input, currentValues) {
+	    var numCorrect = 0;
+	
+	    return {
+	        type: UPDATE_SCORE,
+	        payload: {
+	            gotTaskRight: distance === 0
+	        }
+	    };
+	};
+	
+	var nextTask = exports.nextTask = function nextTask() {
+	    var taskList = (0, _GameUtils.makeRandomArray)({ length: 10, greatestInteger: 10 });
+	    return {
+	        type: NEXT_TASK,
+	        payload: {
+	            taskList: taskList
+	        }
+	    };
+	};
+
+/***/ },
+/* 774 */
+/*!******************************************!*\
+  !*** ./src/client/app/Game/GameUtils.js ***!
+  \******************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.makeRandomArray = makeRandomArray;
+	exports.getListLevenshtein = getListLevenshtein;
+	
+	var _fastLevenshtein = __webpack_require__(/*! fast-levenshtein */ 233);
+	
+	var _fastLevenshtein2 = _interopRequireDefault(_fastLevenshtein);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+	
+	function makeRandomArray(args) {
+	    return [].concat(_toConsumableArray(new Array(args.arrayLength))).map(function (_, i) {
+	        return Math.round(Math.random() * args.greatestInteger);
+	    });
+	}
+	
+	function getListLevenshtein(v1, v2) {
+	    var vals = [v1.toString(), v2.toString()];
+	    var distance = _fastLevenshtein2.default.get(vals[0], vals[1]);
+	    return distance;
+	}
+
+/***/ },
+/* 775 */
+/*!*************************************!*\
+  !*** ./src/client/app/Game/Game.js ***!
+  \*************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactDom = __webpack_require__(/*! react-dom */ 32);
+	
+	var _semanticUiReact = __webpack_require__(/*! semantic-ui-react */ 237);
+	
+	var _redux = __webpack_require__(/*! redux */ 190);
+	
+	var _reactRedux = __webpack_require__(/*! react-redux */ 183);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var Game = function (_React$Component) {
+	    _inherits(Game, _React$Component);
+	
+	    function Game() {
+	        _classCallCheck(this, Game);
+	
+	        return _possibleConstructorReturn(this, (Game.__proto__ || Object.getPrototypeOf(Game)).apply(this, arguments));
+	    }
+	
+	    _createClass(Game, [{
+	        key: 'render',
+	        value: function render() {
+	            var button = void 0;
+	            if (!this.props.hasBegun) button = _react2.default.createElement(
+	                _semanticUiReact.Button,
+	                { size: 'massive', onClick: this.props.handleStart },
+	                'Begin'
+	            );
+	            return _react2.default.createElement(
+	                _semanticUiReact.Container,
+	                null,
+	                _react2.default.createElement(
+	                    _semanticUiReact.Grid,
+	                    { centered: true, padded: true, columns: 1 },
+	                    _react2.default.createElement(
+	                        _semanticUiReact.Grid.Column,
+	                        null,
+	                        _react2.default.createElement(
+	                            _semanticUiReact.Container,
+	                            { text: true },
+	                            _react2.default.createElement(
+	                                _semanticUiReact.Header,
+	                                { as: 'h1' },
+	                                'Mandarin Numbers'
+	                            ),
+	                            _react2.default.createElement(
+	                                'p',
+	                                null,
+	                                ' We\'ll read off a series of random numbers. Input the numbers you hear back.'
+	                            ),
+	                            button
+	                        )
+	                    )
+	                )
+	            );
+	        }
+	    }]);
+	
+	    return Game;
+	}(_react2.default.Component);
+	
+	exports.default = Game;
+
+/***/ },
+/* 776 */
+/*!*********************************************!*\
+  !*** ./src/client/app/Game/GameReducers.js ***!
+  \*********************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _GameActions = __webpack_require__(/*! ./GameActions */ 773);
+	
+	var gameActions = _interopRequireWildcard(_GameActions);
+	
+	var _immutable = __webpack_require__(/*! immutable */ 770);
+	
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+	
+	var GameState = new _immutable.Record({
+	  currentTask: null,
+	  hasBegun: false,
+	  tasksCorrect: 0,
+	  totalTasks: 0
+	});
+	
+	var gameReducer = function gameReducer() {
+	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : new GameState();
+	  var _ref = arguments[1];
+	  var payload = _ref.payload,
+	      type = _ref.type;
+	
+	  switch (type) {
+	    case gameActions.START_GAME:
+	      return state.merge({ hasBegun: true });
+	
+	    case gameActions.UPDATE_SCORE:
+	      return state.merge({
+	        tasksCorrect: state.tasksCorrect + payload.gotTaskRight,
+	        totalTasks: state.totalTasks++
+	      });
+	
+	    case gameActions.NEXT_TASK:
+	      return state.merge({ currentTask: payload.nextTask });
+	
+	    default:
+	      return state;
+	  }
+	};
+	
+	exports.default = gameReducer;
 
 /***/ }
 /******/ ]);

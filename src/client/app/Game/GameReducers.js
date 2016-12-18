@@ -20,7 +20,7 @@ const gameReducer = (state = new GameState(), {payload, type}) => {
         });
 
     case gameActions.NEXT_TASK:
-      return state.merge({currentTask: payload.nextTask});
+      return state.merge({currentTask: payload.currentTask});
 
     default:
       return state;

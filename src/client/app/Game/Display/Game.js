@@ -1,25 +1,33 @@
 import React from 'react';
 import {render} from 'react-dom';
 import {Container, Grid, Button, Header} from 'semantic-ui-react'
-import { bindActionCreators } from 'redux'
-import { dispatch, connect } from 'react-redux'
+import Gunplay from './Gunplay'
 
 
 export default class Game extends React.Component {
     render () {
-        let button;
-        if (!this.props.hasBegun) button = <Button size='massive' onClick={this.props.handleStart}>Begin</Button>;
+        let mainDisplay;
+
+        if (!this.props.hasBegun) {
+            mainDisplay = (
+                <div>
+                <p>We'll read off a series of random numbers. Input the numbers you hear back.</p>
+                <Button size='massive' onClick={this.props.handleStart}>Begin</Button>
+                </div>
+            );
+        } else {
+            mainDisplay = (<Gunplay {...this.props}/>)
+        }
+
         return (<Container>
            <Grid centered padded columns={1}>
             <Grid.Column>
                 <Container text >
                     <Header as='h1'>Mandarin Numbers</Header>
-                    <p> We'll read off a series of random numbers. Input the numbers you hear back.</p>
-                    {button}
+                    {mainDisplay}
                 </Container>
             </Grid.Column>
         </Grid>
         </Container>);
     }
 }
-

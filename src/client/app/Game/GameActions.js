@@ -23,11 +23,11 @@ export const updateScore = (input, currentValues) => {
 };
 
 export const nextTask = () => {
-    let taskList = makeRandomArray({length: 10, greatestInteger: 10});
+    let taskList = makeRandomArray({arrayLength: 10, greatestInteger: 9});
     return {
         type: NEXT_TASK,
         payload: {
-            taskList: taskList
+            currentTask: taskList
         }
     };
 }

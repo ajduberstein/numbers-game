@@ -1,20 +1,18 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { startGame, updateScore, nextTask } from './GameActions';
-import Game from './Game';
+import Game from './Display/Game';
 
 
 const mapStateToProps = (state) => {
-  return {
-    hasBegun: state.hasBegun,
-  };
-};
+  return state.toJS();
+}
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    // TODO verify state change
     handleStart: () => {
-      dispatch(startGame())
+      dispatch(startGame());
+      dispatch(nextTask());
     }
   }
 };

@@ -66668,7 +66668,7 @@
   \****************************************************/
 /***/ function(module, exports) {
 
-	'use strict';
+	"use strict";
 	
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
@@ -66680,9 +66680,10 @@
 	
 	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 	
+	// TODO redo with audio sprite, need new audio
 	var NUM_FILES = 10;
 	var AUDIO_FILES = [].concat(_toConsumableArray(new Array(NUM_FILES))).map(function (_, i) {
-	    return new Audio('static/audio/CH_' + i + '.m4a');
+	    return new Audio("static/audio/CH_" + i + ".m4a");
 	});
 	var MILLISECONDS_TO_WAIT = 200;
 	
@@ -66691,38 +66692,30 @@
 	        _classCallCheck(this, AudioPlayer);
 	
 	        this.currentTask = currentTask;
-	        this.playTrack = this.playTrack.bind(this);
 	        this.play = this.play.bind(this);
 	    }
 	
 	    _createClass(AudioPlayer, [{
-	        key: 'playTrack',
-	        value: function playTrack(trackNum) {
-	            AUDIO_FILES[trackNum].play();
-	        }
-	    }, {
-	        key: 'sleep',
+	        key: "sleep",
 	        value: function sleep(time) {
 	            return new Promise(function (resolve) {
 	                return setTimeout(resolve, time);
 	            });
 	        }
 	    }, {
-	        key: 'play',
+	        key: "play",
 	        value: function play() {
 	            var _this = this;
 	
 	            var current = Promise.resolve();
 	            Promise.all(this.currentTask.map(function (id) {
 	                current = current.then(function () {
-	                    return _this.sleep(500).then(function () {
-	                        return _this.playTrack(id);
+	                    return _this.sleep(1500).then(function () {
+	                        return AUDIO_FILES[id].play();
 	                    });
 	                });
 	                return current;
-	            })).then(function (results) {
-	                console.log('done');
-	            });
+	            })).catch(console.log.bind(console));
 	        }
 	    }]);
 	

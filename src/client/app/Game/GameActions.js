@@ -24,7 +24,7 @@ export const updateScore = (input) => {
 
 export const nextTask = () => {
     // TODO make this random
-    let nextTask = makeRandomArray({arrayLength: 10, greatestInteger: 9});
+    let nextTask = makeRandomArray({arrayLength: 7, greatestInteger: 9});
     return {
         type: NEXT_TASK,
         payload: {nextTask}

@@ -12,7 +12,7 @@ class Gunplay extends React.Component {
         this.audio.play();
         return (
             <div>
-                <p>HEY</p>
+                <p>BRO</p>
                 <p>{this.props.currentTask}</p>
             </div>
         );

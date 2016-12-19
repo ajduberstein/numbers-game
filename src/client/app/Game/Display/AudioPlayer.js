@@ -1,30 +1,35 @@
 // TODO redo with audio sprite, need new audio
-const NUM_FILES = 10;
-const AUDIO_FILES = [...new Array(NUM_FILES)].map(
-    (_, i) => new Audio(`static/audio/CH_${i}.m4a`)
-);
-const MILLISECONDS_TO_WAIT = 200;
+import { Howl } from 'Howler';
+
 
 class AudioPlayer {
     constructor(currentTask) {
         this.currentTask = currentTask;
-        this.play = this.play.bind(this)
+        this.play = this.play.bind(this);
+        this.sound = new Howl({
+          src: ['static/audio/CN.mp3'],
+          sprite: {
+            1: [250, 350],
+            2: [700, 600],
+            3: [1410, 700],
+            4: [2300, 800],
+            5: [3200, 900],
+            6: [4100, 750],
+            7: [5200, 400],
+            8: [5900, 400],
+            9: [6800, 600],
+            0: [7600, 850],
+            silence: [9001, 250]
+          }
+        });
     }
 
-    sleep (time) {
-      return new Promise((resolve) => setTimeout(resolve, time));
+    playTrackName(name) {
+        this.sound.play(name.toString());
     }
 
-    play() {
-        let current = Promise.resolve();
-        Promise.all(this.currentTask.map((id) => {
-            current = current.then(() => {
-                return this.sleep(1500).then(
-                    () => (AUDIO_FILES[id].play())
-                )
-            });
-            return current;
-        })).catch(console.log.bind(console))
+    *play() {
+
     }
 }
 

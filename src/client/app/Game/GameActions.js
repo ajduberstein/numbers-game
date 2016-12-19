@@ -3,6 +3,7 @@ import {makeRandomArray, getListLevenshtein} from './GameUtils';
 export const NEXT_TASK = 'NEXT_TASK';
 export const UPDATE_SCORE = 'UPDATE_SCORE';
 export const START_GAME  = 'START_GAME';
+export const SILENCE_TASK  = 'SILENCE_TASK';
 
 
 export const startGame = () => {
@@ -30,4 +31,10 @@ export const nextTask = () => {
             currentTask: taskList
         }
     };
-}
+};
+
+export const silenceTask = () => {
+    return {
+        type: SILENCE_TASK
+    };
+};

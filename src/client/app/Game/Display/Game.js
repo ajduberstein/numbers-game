@@ -5,13 +5,14 @@ import Gunplay from './Gunplay'
 
 
 export default class Game extends React.Component {
+
     render () {
         let mainDisplay;
 
         if (!this.props.hasBegun) {
             mainDisplay = (
                 <div>
-                <p>We'll read off a series of random numbers. Input the numbers you hear back.</p>
+                <p>I'll read off a series of random numbers. Type for me the numbers that you hear.</p>
                 <Button size='massive' onClick={this.props.handleStart}>Begin</Button>
                 </div>
             );

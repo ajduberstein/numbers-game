@@ -4,6 +4,7 @@ import { Record  } from 'immutable';
 const GameState = new Record({
   currentTask: null,
   hasBegun: false,
+  audioShouldPlay: false,
   tasksCorrect: 0,
   totalTasks: 0
 });
@@ -20,7 +21,10 @@ const gameReducer = (state = new GameState(), {payload, type}) => {
         });
 
     case gameActions.NEXT_TASK:
-      return state.merge({currentTask: payload.currentTask});
+      return state.merge({currentTask: payload.currentTask, audioShouldPlay: true});
+
+    case gameActions.SILENCE_TASK:
+      return state.merge({audioShouldPlay: false});
 
     default:
       return state;

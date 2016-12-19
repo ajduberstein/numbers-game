@@ -1,7 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { startGame, updateScore, nextTask } from './GameActions';
+import { startGame, silenceTask, updateScore, nextTask } from './GameActions';
 import Game from './Display/Game';
+
 
 
 const mapStateToProps = (state) => {
@@ -13,8 +14,15 @@ const mapDispatchToProps = (dispatch) => {
     handleStart: () => {
       dispatch(startGame());
       dispatch(nextTask());
+    },
+    handleGrade: (input) => {
+      dispatch(updateScore(input));
+      dispatch(nextTask());
+    },
+    handleFinishedPlaying: () => {
+      dispatch(silenceTask());
     }
-  }
+  };
 };
 
 const GameContainer = connect(

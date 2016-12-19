@@ -10,7 +10,7 @@ const randomData = () => {
     let dataXY = [...Array(ARRAY_LENGTH)];
     dataXY.map(
         (x, i) => dataXY[i] = {
-            x: Math.cos(i + 1)*Math.tan(i + 1)*Math.sin(1/(i + 2)),
+            x: Math.cos(i + 1)*Math.tan(i + 1)*Math.sin(1/(i + 2)) - 600,
             y: i + 1,
             size: RADIUS*Math.abs(Math.sin(i + 1)),
             color: COLORS[i % COLORS.length]
@@ -23,7 +23,7 @@ class MusicAnimationChild extends React.Component {
 
     render () {
         return (<XYPlot
-          width={1200}
+          width={650}
           height={300}
           animation={true}
           colorType={'literal'}
@@ -45,7 +45,7 @@ class MusicAnimation extends React.Component {
         super(props);
         this.state = {
             data: randomData(),
-            idx: 0
+            idx: INCREMENT
         };
         this.tick = this.tick.bind(this);
     }
@@ -58,9 +58,15 @@ class MusicAnimation extends React.Component {
         clearInterval(this.timer);
     }
 
+    componentWillReceiveProps(nextProps) {
+        if (!nextProps.isPlaying) {
+            clearInterval(this.timer);
+        }
+    }
+
     tick() {
-        console.log(this.state.idx)
-        this.setState({idx: this.state.idx + INCREMENT});
+        console.log(this.state.idx);
+        this.setState({idx: (this.state.idx + INCREMENT) % ARRAY_LENGTH});
     }
 
     render () {

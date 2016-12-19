@@ -8,14 +8,12 @@ const RATE = {
     NORMAL: 1.0,
     EASY: 0.98
 };
-const WAIT_TIME_MS = 850;
+// DEV ONLY
+const WAIT_TIME_MS = 10;
 
 class AudioPlayer extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            isPlaying: true
-        };
         this.play = this.play.bind(this);
         this.rate = RATE[this.props.difficulty];
         this.waitTime = Math.round(WAIT_TIME_MS/this.rate);
@@ -52,7 +50,7 @@ class AudioPlayer extends React.Component {
             this._playTrackName(track);
             await this._sleep(this.waitTime);
         }
-        this.setState({isPlaying: false});
+        this.props.onFinishedPlaying();
     }
 
     componentDidMount() {
@@ -61,14 +59,13 @@ class AudioPlayer extends React.Component {
 
     render() {
         return (<MusicAnimation
-            isPlaying={this.state.isPlaying}
+            isPlaying={true}
             waitTime={this.waitTime}
          />)
     }
 }
 
 AudioPlayer.defaultProps = {
-    isPlaying: false,
     difficulty: 'NORMAL',
     currentTask: []
 };

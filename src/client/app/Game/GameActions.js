@@ -1,4 +1,4 @@
-import {makeRandomArray, getListLevenshtein} from './GameUtils';
+import {makeRandomArray} from './GameUtils';
 
 export const NEXT_TASK = 'NEXT_TASK';
 export const UPDATE_SCORE = 'UPDATE_SCORE';
@@ -10,26 +10,25 @@ export const startGame = () => {
     return {
         type: START_GAME
     };
-}
+};
 
-export const updateScore = (input, currentValues) => {
-    let numCorrect = 0;
-
+export const updateScore = (input) => {
+    const reg = /[^0-9]/;
+    let res = input.replace(reg, '');
+    debugger;
+    let inputArray = res.split("");
     return {
         type: UPDATE_SCORE,
-        payload: {
-            gotTaskRight: distance === 0
-        }
+        payload: {inputArray}
     };
 };
 
 export const nextTask = () => {
-    let taskList = makeRandomArray({arrayLength: 10, greatestInteger: 9});
+    // TODO make this random
+    let nextTask = makeRandomArray({arrayLength: 10, greatestInteger: 9});
     return {
         type: NEXT_TASK,
-        payload: {
-            currentTask: taskList
-        }
+        payload: {nextTask}
     };
 };
 

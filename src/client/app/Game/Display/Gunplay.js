@@ -6,14 +6,21 @@ class Gunplay extends React.Component {
 
     constructor(props) {
         super(props);
+        this.state = {
+            mainInput: 'waiting...'
+        };
         this.onSubmit = this.onSubmit.bind(this);
+        this.handleOnChange = this.handleOnChange.bind(this);
     }
 
     onSubmit(e) {
         e.preventDefault();
-        let index = event.nativeEvent.target.selectedIndex;
-        let text = event.nativeEvent.target[index].text;
-        console.log(text);
+        this.props.handleGrading(this.state.mainInput);
+    }
+
+    handleOnChange(e) {
+        let text = e.target.value;
+        this.setState({mainInput: text});
     }
 
     render () {
@@ -27,12 +34,12 @@ class Gunplay extends React.Component {
             );
 
         } else {
-            submissionForm = (
-                <div>
-                <label>Type the numbers that you heard</label>
-                <Input name='main' onSubmit={this.onSubmit}/>
-                </div>
-            );
+            submissionForm = (<Form name='main' onSubmit={this.onSubmit}>
+                <Form.Field>
+                  <label>Type the numbers that you heard</label>
+                  <Input onChange={this.handleOnChange} value={this.state.value} />
+                </Form.Field>
+            </Form>);
         }
         return (
             <div>

@@ -1,5 +1,5 @@
-import React from 'react'
-import { connect } from 'react-redux'
+import React from 'react';
+import { connect } from 'react-redux';
 import { startGame, silenceTask, updateScore, nextTask } from './GameActions';
 import Game from './Display/Game';
 
@@ -15,7 +15,7 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(startGame());
       dispatch(nextTask());
     },
-    handleGrade: (input) => {
+    handleGrading: (input) => {
       dispatch(updateScore(input));
       dispatch(nextTask());
     },

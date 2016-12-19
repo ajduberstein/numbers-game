@@ -16,20 +16,28 @@ class AudioPlayer {
             5: [3200, 900],
             6: [4100, 750],
             7: [5200, 400],
-            8: [5900, 400],
+            8: [5900, 500],
             9: [6800, 600],
-            0: [7600, 850],
+            0: [7600, 900],
             silence: [9001, 250]
           }
         });
     }
 
-    playTrackName(name) {
-        this.sound.play(name.toString());
+    _sleep(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
     }
 
-    *play() {
+    _playTrackName(name) {
+        const nameStr = name.toString();
+        this.sound.play(nameStr);
+    }
 
+    async play() {
+        for (let each of this.currentTask) {
+            this._playTrackName(each);
+            await this._sleep(900);
+        }
     }
 }
 

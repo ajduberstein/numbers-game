@@ -15,7 +15,6 @@ export const startGame = () => {
 export const updateScore = (input) => {
     const reg = /[^0-9]/;
     let res = input.replace(reg, '');
-    debugger;
     let inputArray = res.split("");
     return {
         type: UPDATE_SCORE,

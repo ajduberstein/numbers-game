@@ -1,4 +1,3 @@
-// TODO redo with audio sprite, need new audio
 import { Howl } from 'Howler';
 import React from 'react';
 import MusicAnimation from './MusicAnimation';
@@ -8,8 +7,8 @@ const RATE = {
     NORMAL: 1.0,
     EASY: 0.98
 };
-// DEV ONLY
-const WAIT_TIME_MS = 10;
+
+const WAIT_TIME_MS = 850;
 
 class AudioPlayer extends React.Component {
     constructor(props) {

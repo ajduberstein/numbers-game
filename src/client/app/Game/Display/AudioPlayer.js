@@ -1,11 +1,24 @@
 // TODO redo with audio sprite, need new audio
 import { Howl } from 'Howler';
+import React from 'react';
+import MusicAnimation from './MusicAnimation';
 
+const RATE = {
+    HARD: 1.08,
+    NORMAL: 1.0,
+    EASY: 0.98
+};
+const WAIT_TIME_MS = 850;
 
-class AudioPlayer {
-    constructor(currentTask) {
-        this.currentTask = currentTask;
+class AudioPlayer extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            isPlaying: true
+        };
         this.play = this.play.bind(this);
+        this.rate = RATE[this.props.difficulty];
+        this.waitTime = Math.round(WAIT_TIME_MS/this.rate);
         this.sound = new Howl({
           src: ['static/audio/CN.mp3'],
           sprite: {
@@ -13,14 +26,15 @@ class AudioPlayer {
             2: [700, 600],
             3: [1410, 700],
             4: [2300, 800],
-            5: [3200, 900],
+            5: [3200, 800],
             6: [4100, 750],
             7: [5200, 400],
             8: [5900, 500],
             9: [6800, 600],
-            0: [7600, 900],
+            0: [7600, 850],
             silence: [9001, 250]
-          }
+          },
+          rate: this.rate
         });
     }
 
@@ -34,11 +48,29 @@ class AudioPlayer {
     }
 
     async play() {
-        for (let each of this.currentTask) {
-            this._playTrackName(each);
-            await this._sleep(900);
+        for (let track of this.props.currentTask) {
+            this._playTrackName(track);
+            await this._sleep(this.waitTime);
         }
+        this.setState({isPlaying: false});
+    }
+
+    componentDidMount() {
+        this.play();
+    }
+
+    render() {
+        return (<MusicAnimation
+            isPlaying={this.state.isPlaying}
+            waitTime={this.waitTime}
+         />)
     }
 }
+
+AudioPlayer.defaultProps = {
+    isPlaying: false,
+    difficulty: 'NORMAL',
+    currentTask: []
+};
 
 export default AudioPlayer;

@@ -75534,7 +75534,7 @@
 	        var _this = _possibleConstructorReturn(this, (Gunplay.__proto__ || Object.getPrototypeOf(Gunplay)).call(this, props));
 	
 	        _this.state = {
-	            mainInput: 'waiting...'
+	            mainInput: ' '
 	        };
 	        _this.onSubmit = _this.onSubmit.bind(_this);
 	        _this.handleOnChange = _this.handleOnChange.bind(_this);
@@ -78599,6 +78599,8 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _semanticUiReact = __webpack_require__(/*! semantic-ui-react */ 536);
+	
 	var _reactVis = __webpack_require__(/*! react-vis */ 1072);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -78620,7 +78622,7 @@
 	    var dataXY = [].concat(_toConsumableArray(Array(ARRAY_LENGTH)));
 	    dataXY.map(function (x, i) {
 	        return dataXY[i] = {
-	            x: Math.cos(i + 1) * Math.tan(i + 1) * Math.sin(1 / (i + 2)) - 600,
+	            x: Math.sin(i) + Math.cos(i + 1) * Math.tan(i + 1) * Math.sin(1 / (i + 2)) - 600,
 	            y: i + 1,
 	            size: RADIUS * Math.abs(Math.sin(i + 1)),
 	            color: COLORS[i % COLORS.length]
@@ -78713,8 +78715,8 @@
 	                    'div',
 	                    null,
 	                    _react2.default.createElement(
-	                        'p',
-	                        null,
+	                        _semanticUiReact.Header,
+	                        { textAlign: 'center' },
 	                        ' ',
 	                        playString,
 	                        ' '
@@ -95194,6 +95196,8 @@
 	
 	var _semanticUiReact = __webpack_require__(/*! semantic-ui-react */ 536);
 	
+	var _Howler = __webpack_require__(/*! Howler */ 1070);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -95212,6 +95216,14 @@
 	    }
 	
 	    _createClass(Feedback, [{
+	        key: 'componentWillMount',
+	        value: function componentWillMount() {
+	            var howl = new _Howler.Howl({
+	                src: ['./static/audio/tada.mp3']
+	            });
+	            if (this.props.digitsCorrect === this.props.currentTask.length) howl.play();
+	        }
+	    }, {
 	        key: 'render',
 	        value: function render() {
 	            var right = this.props.digitsCorrect === this.props.currentTask.length;
@@ -95219,7 +95231,7 @@
 	            var displayCorrect = this.props.digitsCorrect < 0 ? 0 : this.props.digitsCorrect;
 	            var msg = right ? 'Perfect!' : 'Not quite!';
 	            return _react2.default.createElement(
-	                _semanticUiReact.Segment,
+	                'div',
 	                null,
 	                _react2.default.createElement(
 	                    _semanticUiReact.Header,
@@ -95229,63 +95241,56 @@
 	                    ' '
 	                ),
 	                _react2.default.createElement(
-	                    _semanticUiReact.Grid,
-	                    { celled: 'internally', centered: true },
+	                    _semanticUiReact.Segment,
+	                    null,
 	                    _react2.default.createElement(
-	                        _semanticUiReact.Grid.Column,
-	                        { columns: 2, divided: true },
+	                        _semanticUiReact.Grid,
+	                        { celled: 'internally', columns: 2, divided: true },
 	                        _react2.default.createElement(
-	                            _semanticUiReact.Grid.Row,
-	                            null,
+	                            _semanticUiReact.Grid.Column,
+	                            { stretched: true },
 	                            _react2.default.createElement(
-	                                _semanticUiReact.Statistic,
+	                                _semanticUiReact.Statistic.Group,
 	                                null,
-	                                _react2.default.createElement(_semanticUiReact.Statistic.Value, { color: color,
+	                                _react2.default.createElement(_semanticUiReact.Statistic, { label: 'Total Aced',
+	                                    color: color,
 	                                    value: this.props.tasksCorrect }),
-	                                _react2.default.createElement(_semanticUiReact.Statistic.Label, { label: 'Total Aced' })
+	                                _react2.default.createElement(_semanticUiReact.Statistic, { label: 'Total Exercises',
+	                                    value: this.props.totalTasks
+	                                })
 	                            )
 	                        ),
 	                        _react2.default.createElement(
-	                            _semanticUiReact.Grid.Row,
-	                            null,
+	                            _semanticUiReact.Grid.Column,
+	                            { stretched: true },
 	                            _react2.default.createElement(
-	                                _semanticUiReact.Statistic,
+	                                'p',
 	                                null,
 	                                _react2.default.createElement(
-	                                    _semanticUiReact.Statistic.Value,
+	                                    'strong',
 	                                    null,
-	                                    this.props.totalTasks
+	                                    'You entered: '
 	                                ),
+	                                this.props.userInput
+	                            ),
+	                            _react2.default.createElement(
+	                                'p',
+	                                null,
 	                                _react2.default.createElement(
-	                                    _semanticUiReact.Statistic.Label,
+	                                    'strong',
 	                                    null,
-	                                    'Total Exercises'
-	                                )
+	                                    'Correct answer: '
+	                                ),
+	                                this.props.currentTask
+	                            ),
+	                            _react2.default.createElement(
+	                                _semanticUiReact.Button,
+	                                {
+	                                    size: 'massive',
+	                                    onClick: this.props.handleNextTask
+	                                },
+	                                ' Next question! \u52A0\u6CB9\u26FD\uFE0F'
 	                            )
-	                        )
-	                    ),
-	                    _react2.default.createElement(
-	                        _semanticUiReact.Grid.Column,
-	                        { stretched: true },
-	                        _react2.default.createElement(
-	                            'p',
-	                            null,
-	                            'You entered: ',
-	                            this.props.userInput
-	                        ),
-	                        _react2.default.createElement(
-	                            'p',
-	                            null,
-	                            'Correct answer: ',
-	                            this.props.currentTask
-	                        ),
-	                        _react2.default.createElement(
-	                            _semanticUiReact.Button,
-	                            {
-	                                size: 'massive',
-	                                onClick: this.props.handleNextTask
-	                            },
-	                            ' Next question! \u52A0\u6CB9\u26FD\uFE0F'
 	                        )
 	                    )
 	                )

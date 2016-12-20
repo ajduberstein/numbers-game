@@ -39379,7 +39379,7 @@
 	
 	var nextTask = exports.nextTask = function nextTask() {
 	    // TODO make this random
-	    var nextTask = (0, _GameUtils.makeRandomArray)({ arrayLength: 7, greatestInteger: 9 });
+	    var nextTask = (0, _GameUtils.makeRandomArray)({ arrayLength: 5, greatestInteger: 9 });
 	    return {
 	        type: NEXT_TASK,
 	        payload: { nextTask: nextTask }

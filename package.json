@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "hot": "./node_modules/.bin/webpack-dev-server --content-base src/client/public; open http://localhost:8080/webpack-dev-server/",
-    "build": "webpack",
+    "build": "./node_modules/.bin/webpack -d",
+    "copy-css": "cp -R semantic/ ./src/client/public/",
     "start": "node_modules/.bin/http-server ./src/client/public/"
   },
   "author": "",

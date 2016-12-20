@@ -78613,18 +78613,18 @@
 	
 	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 	
-	var INCREMENT = 1000;
+	var INCREMENT = 5;
 	var ARRAY_LENGTH = 12 * INCREMENT;
-	var RADIUS = 100;
+	var RADIUS = 1000;
 	var COLORS = ['#569FD3', '#F9C802', '#E10001', '#66BF02', '#E87A14'];
 	
 	var randomData = function randomData() {
 	    var dataXY = [].concat(_toConsumableArray(Array(ARRAY_LENGTH)));
 	    dataXY.map(function (x, i) {
 	        return dataXY[i] = {
-	            x: Math.sin(i) + Math.cos(i + 1) * Math.tan(i + 1) * Math.sin(1 / (i + 2)) - 600,
-	            y: i + 1,
-	            size: RADIUS * Math.abs(Math.sin(i + 1)),
+	            x: i,
+	            y: 0,
+	            size: Math.round(RADIUS * Math.abs(Math.sin(i + 1))),
 	            color: COLORS[i % COLORS.length]
 	        };
 	    });
@@ -78646,8 +78646,8 @@
 	            return _react2.default.createElement(
 	                _reactVis.XYPlot,
 	                {
-	                    width: 650,
-	                    height: 300,
+	                    width: 600,
+	                    height: 100,
 	                    animation: true,
 	                    colorType: 'literal',
 	                    colorDomain: [0, 100],
@@ -78701,7 +78701,6 @@
 	    }, {
 	        key: 'tick',
 	        value: function tick() {
-	            console.log(this.state.idx);
 	            this.setState({ idx: (this.state.idx + INCREMENT) % ARRAY_LENGTH });
 	        }
 	    }, {

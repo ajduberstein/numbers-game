@@ -2,18 +2,18 @@ import React from 'react';
 import {Header} from 'semantic-ui-react';
 import {XYPlot, MarkSeries, LineSeries} from 'react-vis';
 
-const INCREMENT = 1000;
+const INCREMENT = 5;
 const ARRAY_LENGTH = 12*INCREMENT;
-const RADIUS = 100;
+const RADIUS = 1000;
 const COLORS = ['#569FD3', '#F9C802', '#E10001', '#66BF02', '#E87A14'];
 
 const randomData = () => {
     let dataXY = [...Array(ARRAY_LENGTH)];
     dataXY.map(
         (x, i) => dataXY[i] = {
-            x: Math.sin(i) + Math.cos(i + 1)*Math.tan(i + 1)*Math.sin(1/(i + 2)) - 600,
-            y: i + 1,
-            size: RADIUS*Math.abs(Math.sin(i + 1)),
+            x: i,
+            y: 0,
+            size: Math.round(RADIUS*Math.abs(Math.sin(i + 1))),
             color: COLORS[i % COLORS.length]
         }
     );
@@ -24,8 +24,8 @@ class MusicAnimationChild extends React.Component {
 
     render () {
         return (<XYPlot
-          width={650}
-          height={300}
+          width={600}
+          height={100}
           animation={true}
           colorType={'literal'}
           colorDomain={[0, 100]}
@@ -66,7 +66,6 @@ class MusicAnimation extends React.Component {
     }
 
     tick() {
-        console.log(this.state.idx);
         this.setState({idx: (this.state.idx + INCREMENT) % ARRAY_LENGTH});
     }
 

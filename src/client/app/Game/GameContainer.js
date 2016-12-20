@@ -1,6 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { startGame, silenceTask, updateScore, nextTask } from './GameActions';
+import {
+    startGame,
+    toggleFeedback,
+    silenceTask,
+    updateScore,
+    nextTask
+} from './GameActions';
 import Game from './Display/Game';
 
 
@@ -17,6 +23,10 @@ const mapDispatchToProps = (dispatch) => {
     },
     handleGrading: (input) => {
       dispatch(updateScore(input));
+      dispatch(toggleFeedback());
+    },
+    handleNextTask: () => {
+      dispatch(toggleFeedback());
       dispatch(nextTask());
     },
     handleFinishedPlaying: () => {

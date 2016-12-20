@@ -1,6 +1,7 @@
 import React from 'react';
-import { Input, Form} from 'semantic-ui-react';
+import { Icon, Segment, Divider, Input, Form } from 'semantic-ui-react';
 import AudioPlayer from './AudioPlayer';
+import Feedback from './Feedback';
 
 class Gunplay extends React.Component {
 
@@ -19,12 +20,13 @@ class Gunplay extends React.Component {
     }
 
     handleOnChange(e) {
+        e.preventDefault();
         let text = e.target.value;
         this.setState({mainInput: text});
     }
 
     render () {
-        let audioPlayer, submissionForm;
+        let audioPlayer, submissionForm, feedback;
         if (this.props.audioShouldPlay) {
             audioPlayer = (
                 <AudioPlayer
@@ -34,18 +36,32 @@ class Gunplay extends React.Component {
             );
 
         } else {
-            submissionForm = (<Form name='main' onSubmit={this.onSubmit}>
-                <Form.Field>
-                  <label>Type the numbers that you heard</label>
-                  <Input onChange={this.handleOnChange} value={this.state.value} />
-                </Form.Field>
-            </Form>);
+            submissionForm = (
+            <Segment padded>
+            <Form size='massive'
+                name='main'
+                onSubmit={this.onSubmit}>
+                <Form.Field
+                    name='charlie'
+                    onChange={this.handleOnChange}
+                    icon='write'
+                    control='input'
+                    value={this.state.value}
+                    label='Type the numbers that you heard and press enter'
+                />
+            </Form>
+            </Segment>
+            );
+        }
+        if (this.props.shouldDisplayFeedback) {
+            audioPlayer, submissionForm= null;
+            feedback = <Feedback {...this.props}/>
         }
         return (
             <div>
                 {audioPlayer}
                 {submissionForm}
-                {this.props.currentTask}
+                {feedback}
             </div>
         );
     }

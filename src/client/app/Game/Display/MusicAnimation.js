@@ -1,4 +1,5 @@
 import React from 'react';
+import {Header} from 'semantic-ui-react';
 import {XYPlot, MarkSeries, LineSeries} from 'react-vis';
 
 const INCREMENT = 1000;
@@ -10,7 +11,7 @@ const randomData = () => {
     let dataXY = [...Array(ARRAY_LENGTH)];
     dataXY.map(
         (x, i) => dataXY[i] = {
-            x: Math.cos(i + 1)*Math.tan(i + 1)*Math.sin(1/(i + 2)) - 600,
+            x: Math.sin(i) + Math.cos(i + 1)*Math.tan(i + 1)*Math.sin(1/(i + 2)) - 600,
             y: i + 1,
             size: RADIUS*Math.abs(Math.sin(i + 1)),
             color: COLORS[i % COLORS.length]
@@ -76,7 +77,7 @@ class MusicAnimation extends React.Component {
             let playString = 'Reading numbers.' + periods;
             return (
                 <div>
-                <p> {playString} </p>
+                <Header textAlign='center'> {playString} </Header>
                 <MusicAnimationChild data={dataXY}/>
                 </div>
             );

@@ -8,7 +8,7 @@ class Gunplay extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            mainInput: 'waiting...'
+            mainInput: ' '
         };
         this.onSubmit = this.onSubmit.bind(this);
         this.handleOnChange = this.handleOnChange.bind(this);

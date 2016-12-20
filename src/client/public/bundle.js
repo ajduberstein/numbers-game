@@ -95183,7 +95183,7 @@
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
-	  value: true
+	    value: true
 	});
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -95203,97 +95203,97 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
 	var Feedback = function (_React$Component) {
-	  _inherits(Feedback, _React$Component);
+	    _inherits(Feedback, _React$Component);
 	
-	  function Feedback() {
-	    _classCallCheck(this, Feedback);
+	    function Feedback() {
+	        _classCallCheck(this, Feedback);
 	
-	    return _possibleConstructorReturn(this, (Feedback.__proto__ || Object.getPrototypeOf(Feedback)).apply(this, arguments));
-	  }
+	        return _possibleConstructorReturn(this, (Feedback.__proto__ || Object.getPrototypeOf(Feedback)).apply(this, arguments));
+	    }
 	
-	  _createClass(Feedback, [{
-	    key: 'render',
-	    value: function render() {
-	      var right = this.props.digitsCorrect === this.props.currentTask.length;
-	      var color = right ? 'green' : 'red';
-	      var displayCorrect = this.props.digitsCorrect < 0 ? 0 : this.props.digitsCorrect;
-	      var msg = right ? 'Perfect!' : 'Not quite!';
-	      return _react2.default.createElement(
-	        'div',
-	        null,
-	        _react2.default.createElement(
-	          _semanticUiReact.Header,
-	          { color: color },
-	          ' ',
-	          msg,
-	          ' '
-	        ),
-	        _react2.default.createElement(
-	          _semanticUiReact.Grid,
-	          { celled: 'internally', centered: true },
-	          _react2.default.createElement(
-	            _semanticUiReact.Grid.Column,
-	            { width: 5 },
-	            _react2.default.createElement(
-	              _semanticUiReact.Grid.Row,
-	              null,
-	              _react2.default.createElement(
-	                _semanticUiReact.Statistic,
-	                null,
-	                _react2.default.createElement(_semanticUiReact.Statistic.Value, { color: color,
-	                  value: this.props.tasksCorrect }),
-	                _react2.default.createElement(_semanticUiReact.Statistic.Label, { label: 'Total Aces' })
-	              )
-	            ),
-	            _react2.default.createElement(
-	              _semanticUiReact.Grid.Row,
-	              null,
-	              _react2.default.createElement(
-	                _semanticUiReact.Statistic,
+	    _createClass(Feedback, [{
+	        key: 'render',
+	        value: function render() {
+	            var right = this.props.digitsCorrect === this.props.currentTask.length;
+	            var color = right ? 'green' : 'red';
+	            var displayCorrect = this.props.digitsCorrect < 0 ? 0 : this.props.digitsCorrect;
+	            var msg = right ? 'Perfect!' : 'Not quite!';
+	            return _react2.default.createElement(
+	                _semanticUiReact.Segment,
 	                null,
 	                _react2.default.createElement(
-	                  _semanticUiReact.Statistic.Value,
-	                  null,
-	                  this.props.totalTasks
+	                    _semanticUiReact.Header,
+	                    { color: color, textAlign: 'center' },
+	                    ' ',
+	                    msg,
+	                    ' '
 	                ),
 	                _react2.default.createElement(
-	                  _semanticUiReact.Statistic.Label,
-	                  null,
-	                  'Total Exercises'
+	                    _semanticUiReact.Grid,
+	                    { celled: 'internally', centered: true },
+	                    _react2.default.createElement(
+	                        _semanticUiReact.Grid.Column,
+	                        { columns: 2, divided: true },
+	                        _react2.default.createElement(
+	                            _semanticUiReact.Grid.Row,
+	                            null,
+	                            _react2.default.createElement(
+	                                _semanticUiReact.Statistic,
+	                                null,
+	                                _react2.default.createElement(_semanticUiReact.Statistic.Value, { color: color,
+	                                    value: this.props.tasksCorrect }),
+	                                _react2.default.createElement(_semanticUiReact.Statistic.Label, { label: 'Total Aced' })
+	                            )
+	                        ),
+	                        _react2.default.createElement(
+	                            _semanticUiReact.Grid.Row,
+	                            null,
+	                            _react2.default.createElement(
+	                                _semanticUiReact.Statistic,
+	                                null,
+	                                _react2.default.createElement(
+	                                    _semanticUiReact.Statistic.Value,
+	                                    null,
+	                                    this.props.totalTasks
+	                                ),
+	                                _react2.default.createElement(
+	                                    _semanticUiReact.Statistic.Label,
+	                                    null,
+	                                    'Total Exercises'
+	                                )
+	                            )
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        _semanticUiReact.Grid.Column,
+	                        { stretched: true },
+	                        _react2.default.createElement(
+	                            'p',
+	                            null,
+	                            'You entered: ',
+	                            this.props.userInput
+	                        ),
+	                        _react2.default.createElement(
+	                            'p',
+	                            null,
+	                            'Correct answer: ',
+	                            this.props.currentTask
+	                        ),
+	                        _react2.default.createElement(
+	                            _semanticUiReact.Button,
+	                            {
+	                                size: 'massive',
+	                                onClick: this.props.handleNextTask
+	                            },
+	                            ' Next question! \u52A0\u6CB9\u26FD\uFE0F'
+	                        )
+	                    )
 	                )
-	              )
-	            )
-	          ),
-	          _react2.default.createElement(
-	            _semanticUiReact.Grid.Column,
-	            { width: 5 },
-	            _react2.default.createElement(
-	              'p',
-	              null,
-	              'You entered: ',
-	              this.props.userInput
-	            ),
-	            _react2.default.createElement(
-	              'p',
-	              null,
-	              'Correct answer: ',
-	              this.props.currentTask
-	            )
-	          )
-	        ),
-	        _react2.default.createElement(
-	          _semanticUiReact.Button,
-	          {
-	            size: 'massive',
-	            onClick: this.props.handleNextTask
-	          },
-	          ' Next question! \u52A0\u6CB9\u26FD\uFE0F'
-	        )
-	      );
-	    }
-	  }]);
+	            );
+	        }
+	    }]);
 	
-	  return Feedback;
+	    return Feedback;
 	}(_react2.default.Component);
 	
 	exports.default = Feedback;

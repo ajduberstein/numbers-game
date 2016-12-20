@@ -1,7 +1,14 @@
 import React from 'react';
-import { Grid, Header, Statistic, Button } from 'semantic-ui-react';
+import { Grid, Header, Statistic, Segment, Button } from 'semantic-ui-react';
+import { Howl } from 'Howler';
 
 class Feedback extends React.Component {
+    componentWillMount() {
+        const howl = new Howl({
+            src: ['./static/audio/tada.mp3']
+        });
+        if (this.props.digitsCorrect === this.props.currentTask.length) howl.play()
+    }
     render() {
         const right = this.props.digitsCorrect === this.props.currentTask.length;
         const color = right ? 'green' : 'red';
@@ -9,35 +16,29 @@ class Feedback extends React.Component {
         const msg =  right ? 'Perfect!' : 'Not quite!';
         return (
           <div>
-          <Header color={color}> {msg} </Header>
-          <Grid celled='internally' centered>
-            <Grid.Column width={5}>
-            <Grid.Row>
-                <Statistic>
-                <Statistic.Value color={color}
-                    value={this.props.tasksCorrect} />
-                  <Statistic.Label label='Total Aces' />
-                </Statistic>
-
-            </Grid.Row>
-            <Grid.Row>
-
-                <Statistic>
-                  <Statistic.Value>{this.props.totalTasks}</Statistic.Value>
-                  <Statistic.Label>Total Exercises</Statistic.Label>
-                </Statistic>
-            </Grid.Row>
+          <Header color={color} textAlign={'center'}> {msg} </Header>
+          <Segment>
+          <Grid celled='internally' columns={2} divided>
+            <Grid.Column stretched>
+                <Statistic.Group>
+                    <Statistic label='Total Aced'
+                        color={color}
+                        value={this.props.tasksCorrect} />
+                    <Statistic label='Total Exercises'
+                        value={this.props.totalTasks}
+                    />
+                </Statistic.Group>
           </Grid.Column>
-          <Grid.Column width={5}>
-            <p>You entered: {this.props.userInput}</p>
-            <p>Correct answer: {this.props.currentTask}</p>
-          </Grid.Column>
-          </Grid>
+          <Grid.Column stretched>
+            <p><strong>You entered: </strong>{this.props.userInput}</p>
+            <p><strong>Correct answer: </strong>{this.props.currentTask}</p>
             <Button
                 size='massive'
                 onClick={this.props.handleNextTask}
             > Next question! 加油⛽️</Button>
-
+          </Grid.Column>
+          </Grid>
+          </Segment>
           </div>
         )
     }

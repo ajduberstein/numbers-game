@@ -14,3 +14,8 @@ npm install
 npm build
 num start
 ```
+
+# Attribution
+
+[Trumpet](http://soundbible.com/1003-Ta-Da.html) by Mike Koenig 
+under an [Attribution 3.0](https://creativecommons.org/licenses/by/3.0/us/legalcode) license

@@ -12,7 +12,7 @@ git clone https://github.com/ajduberstein/numbers-game.git
 cd numbers-game
 npm install
 npm build
-num start
+npm start
 ```
 
 # Attribution

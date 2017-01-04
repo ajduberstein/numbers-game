@@ -5,3 +5,4 @@ npm-debug.log
 .DS_Store
 /*.env
 /src/client/public/dist
+__snapshots__/

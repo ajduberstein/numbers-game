@@ -10,7 +10,6 @@ import {
 import Game from './Display/Game';
 
 
-
 const mapStateToProps = (state) => {
   return state.toJS();
 }

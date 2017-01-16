@@ -60,6 +60,7 @@
     "react-addons-test-utils": "^15.4.1",
     "react-test-renderer": "^15.4.1",
     "redux-logger": "^2.7.4",
+    "redux-mock-store": "^1.2.1",
     "require-dot-file": "^0.4.0",
     "run-sequence": "^1.2.2",
     "sinon": "^1.17.7",

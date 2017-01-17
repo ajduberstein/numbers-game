@@ -3,7 +3,7 @@ Numbers Repetition Game
 
 A simple language learning game as a demonstration of a basic React/Redux app.
 
-[Demo](numbersgame.herokuapp.com)
+[Demo](https://numbersgame.herokuapp.com)
 
 # Getting Started
 

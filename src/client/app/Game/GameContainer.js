@@ -11,7 +11,13 @@ import Game from './Display/Game';
 
 
 const mapStateToProps = (state) => {
-  return state.toJS();
+    let currProps;
+    if(state.toJS) {
+      currProps = state.toJS()
+    } else {
+      currProps = state
+    }
+    return currProps;
 }
 
 const mapDispatchToProps = (dispatch) => {

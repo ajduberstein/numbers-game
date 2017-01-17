@@ -1,23 +1,27 @@
-import { Provider } from 'react-redux'
-import GameContainer from './GameContainer';
-import * as actions from './GameActions';
-import * as redux from 'react-redux';
 import React from 'react';
 import configureStore from 'redux-mock-store'
-import {shallow} from 'enzyme';
+
+import {mount} from 'enzyme';
+import sinon from 'sinon';
+import * as redux from 'react-redux';
+import {connect} from 'react-redux';
+import GameContainer from './GameContainer';
 
 const middlewares = []
 const mockStore = configureStore(middlewares)
 
 
-
 describe('connect', () => {
+  const initialState = {}
+  const store = mockStore(initialState)
+
     it('connect actions to the store', () => {
-        const component = shallow(
-            <Provider store={store}>
+        var spy = sinon.spy(redux, "connect");
+        const component = mount(
+            <redux.Provider store={store}>
               <GameContainer />
-            </Provider>
+            </redux.Provider>
         );
-        expect(redux.connect).toHaveBeenCalled();
+        expect(spy.called);
     });
 });

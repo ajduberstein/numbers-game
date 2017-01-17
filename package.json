@@ -95,8 +95,10 @@
     "testRegex": "src/client/app/.*-spec.js$",
     "collectCoverage": true,
     "collectCoverageFrom": [
-      "**/src/client/app/.*.{js,jsx}",
+      "**/src/client/app/**",
       "!**/src/client/app/.*-spec.{js,jsx}",
+      "!**/src/client/app/__snapshots__",
+      "!**/src/client/app/*.js.snap",
       "!**/node_modules/**",
       "!**/vendor/**",
       "!**/semantic/**",

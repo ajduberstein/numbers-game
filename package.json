@@ -97,7 +97,7 @@
     "collectCoverageFrom": [
       "**/src/client/app/**",
       "!**/src/client/app/.*-spec.{js,jsx}",
-      "!**/src/client/app/__snapshots__",
+      "!**/src/client/app/__snapshots__/**",
       "!**/src/client/app/*.js.snap",
       "!**/node_modules/**",
       "!**/vendor/**",
